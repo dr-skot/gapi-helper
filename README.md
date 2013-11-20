@@ -3,7 +3,7 @@ gapi-helper
 
 Simplifies authorization and client-loading with the Google APIs Client Library for JavaScript.
 
-Google's [https://developers.google.com/api-client-library/javascript/start/start-js](getting started) page presents sample code for authorizing and loading the API clients. gapi-helper offers a cleaner way to do it, leaving a smaller footprint in the namespace and abstracting away the implementation details so that all you have to do is provide the configuration and add event listeners. You do this:
+Google's [getting started](https://developers.google.com/api-client-library/javascript/start/start-js) page presents sample code for authorizing and loading the API clients. gapi-helper offers a cleaner way to do it, leaving a smaller footprint in the namespace and abstracting away the implementation details so that all you have to do is provide the configuration and add event listeners. You do this:
 
 ```javascript
     gapi_helper.configure({
@@ -41,4 +41,4 @@ Google's [https://developers.google.com/api-client-library/javascript/start/star
     });
 ```
 
-instead of [https://code.google.com/p/google-api-javascript-client/source/browse/samples/authSample.html?r=ecbb774aee1a9edf53675f72a40391537c0d9b39](this).
+instead of [this](https://code.google.com/p/google-api-javascript-client/source/browse/samples/authSample.html?r=ecbb774aee1a9edf53675f72a40391537c0d9b39).
