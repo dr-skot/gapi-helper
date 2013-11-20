@@ -1,0 +1,66 @@
+<!--
+  Rewrite of Google's authSample.html, using gapi-helper.js
+  The original can be found at
+  https://code.google.com/p/google-api-javascript-client/source/browse/samples/authSample.html
+
+  To run this sample, replace the clientId and apiKey with your application's access keys.
+  It can be found at https://code.google.com/apis/console/?api=plus under API Access.
+  Activate the Google+ service at https://code.google.com/apis/console/ under Services
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <script src="gapi-helper.js"></script>
+  <script src="https://apis.google.com/js/client.js"></script>
+</head>
+<body>
+  <!--Add a button for the user to click to initiate auth sequence -->
+  <button id="authorize-button" style="visibility: hidden">Authorize</button>
+  <div id="content"></div>
+  <p>Retrieves your profile name using the Google Plus API.</p>
+
+  <script>
+    // Replace this clientId and apiKey with your own.
+    // If you don't know what that means, read the section titled "Setup" at
+    // https://developers.google.com/api-client-library/javascript/start/start-js
+    //
+    // The values below only work when run from jsfiddle:
+    // http://jsfiddle.net/drskot/LfsDs/
+    gapi_helper.configure({
+      clientId: '65532434038.apps.googleusercontent.com',
+      apiKey: 'AIzaSyBcqK9PMBGCEg1xsw4kghrVR4oUthaA_Do',
+      scopes: 'https://www.googleapis.com/auth/plus.me', // and/or other services
+      services: {
+        plus: 'v1' // and/or other services
+      }
+    });
+
+    gapi_helper.when('authorized', function () {
+      var authorizeButton = document.getElementById('authorize-button');
+      authorizeButton.style.visibility = 'hidden';
+    });
+
+    gapi_helper.when('authFailed', function () {
+      var authorizeButton = document.getElementById('authorize-button');
+      authorizeButton.style.visibility = '';
+      authorizeButton.onclick = gapi_helper.requestAuth;
+    });
+
+    gapi_helper.when('plusLoaded', function () {
+      var request = gapi.client.plus.people.get({
+        'userId': 'me'
+      });
+      request.execute(function (resp) {
+        var heading = document.createElement('h4');
+        var image = document.createElement('img');
+        image.src = resp.image.url;
+        heading.appendChild(image);
+        heading.appendChild(document.createTextNode(resp.displayName));
+        document.getElementById('content').appendChild(heading);
+      });
+    });
+  </script>
+
+</body>
+</html>
