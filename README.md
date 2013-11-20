@@ -7,8 +7,8 @@ Google's [getting started](https://developers.google.com/api-client-library/java
 
 ```javascript
 gapi_helper.configure({
-	clientId: '65532434038.apps.googleusercontent.com',
-	apiKey: 'AIzaSyBcqK9PMBGCEg1xsw4kghrVR4oUthaA_Do',
+	clientId: 'your client id',
+	apiKey: 'your api key',
 	scopes: 'https://www.googleapis.com/auth/plus.me', // and/or other services
 	services: {
 	    plus: 'v1' // and/or other services
@@ -16,29 +16,47 @@ gapi_helper.configure({
 });
 
 gapi_helper.when('authorized', function () {
-	var authorizeButton = document.getElementById('authorize-button');
-	authorizeButton.style.visibility = 'hidden';
+    // do something when authorized
 });
 
 gapi_helper.when('authFailed', function () {
-	var authorizeButton = document.getElementById('authorize-button');
-	authorizeButton.style.visibility = '';
-	authorizeButton.onclick = gapi_helper.requestAuth;
+    // do something when authorization fails
 });
 
 gapi_helper.when('plusLoaded', function () {
-    var request = gapi.client.plus.people.get({
-        'userId': 'me'
-	});
-	request.execute(function (resp) {
-        var heading = document.createElement('h4');
-        var image = document.createElement('img');
-        image.src = resp.image.url;
-        heading.appendChild(image);
-        heading.appendChild(document.createTextNode(resp.displayName));
-        document.getElementById('content').appendChild(heading);
-    });
+    // do something when the client library is loaded
 });
 ```
 
-instead of [this](https://code.google.com/p/google-api-javascript-client/source/browse/samples/authSample.html?r=ecbb774aee1a9edf53675f72a40391537c0d9b39).
+instead of this:
+
+```javascript
+var clientId = 'your client id';
+var apiKey = 'your api key';
+var scopes = 'https://www.googleapis.com/auth/plus.me';
+
+function handleClientLoad() {
+    gapi.client.setApiKey(apiKey);
+    window.setTimeout(checkAuth,1);
+}
+
+function checkAuth() {
+    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
+}
+
+
+function handleAuthResult(authResult) {
+    if (authResult) {
+        // do something when authorized
+        makeApiCall();
+    } else {
+        // do something when authorization fails
+    }
+}
+
+function makeApiCall() {
+    gapi.client.load('plus', 'v1', function() {
+        // do something when the client library is loaded
+    });
+}
+```
