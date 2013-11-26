@@ -1,9 +1,16 @@
 gapi-helper
 ===========
+http://github.com/dr-skot/gapi-helper
 
-Simplifies authorization and client-loading with the Google APIs Client Library for JavaScript.
+Simplifies authorizing and initializing the Google APIs Client Library for JavaScript.
+
+[example](http://plnkr.co/edit/oz0xLr?p=info)
+
+Overview
+========
 
 Google's [getting started](https://developers.google.com/api-client-library/javascript/start/start-js) page presents sample code for authorizing and loading the API clients. `gapi-helper` offers a cleaner way to do it, leaving a smaller footprint in the namespace and abstracting away the implementation details so that all you have to do is 1) configure and 2) add event listeners. Like this:
+
 
 ```javascript
 <script src="https://apis.google.com/js/client.js"></script>
@@ -35,7 +42,7 @@ gapi_helper.when('plusLoaded', function () {
 For a full rewrite of Google's 
 [authSample.html](https://code.google.com/p/google-api-javascript-client/source/browse/samples/authSample.html) see 
 [authSample.html](https://github.com/dr-skot/gapi-helper/blob/master/authSample.html) 
-in this repository.
+in this repository, or this [plunker](http://plnkr.co/edit/oz0xLr?p=info)
 
 Step 1: load libraries
 ======================
@@ -92,7 +99,7 @@ gapi_helper.when('authFailed', function () {
 });
 ```
 
-One thing you might want to do in this case is call `gapi_helper.requestAuth`, which will prompt the user to allow access.
+One thing you might want to do in this case is call `gapi_helper.requestAuth`, which will request authorization from the user.
 
 ```
 gapi_helper.when('calendarLoaded', function () {
@@ -100,4 +107,4 @@ gapi_helper.when('calendarLoaded', function () {
 });
 ```
 
-Each service `x` requested in the configuration fires an `xLoaded` event when the service is loaded and ready to use.
+Each service `xxx` requested in the configuration fires an `xxxLoaded` event when the service is loaded and ready to use.
