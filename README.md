@@ -4,7 +4,7 @@ http://github.com/dr-skot/gapi-helper
 
 Simplifies authorizing and initializing the Google APIs Client Library for JavaScript.
 
-[example](http://plnkr.co/edit/oz0xLr?p=info)
+[example](http://plnkr.co/edit/oz0xLr?p=preview)
 
 Overview
 ========
